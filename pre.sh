@@ -2,10 +2,10 @@
 
 set -euf -o pipefail
 
-copy -r /etc/custom_files.base/* ./
+cp -fR /etc/custom_files.base/. ./game/csgo/
 
 if [[ -d /etc/custom_files ]]; then
-    copy -r /etc/custom_files/* ./
+    cp -fR /etc/custom_files/. ./game/csgo/
 fi
 
 # Thanks to kus/cs2-modded-server
