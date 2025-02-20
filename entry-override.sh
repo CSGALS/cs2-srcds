@@ -10,6 +10,9 @@ if [[ -f "${STEAMAPPDIR}/post.sh" ]]; then
     rm "${STEAMAPPDIR}/post.sh"
 fi
 
+chown -R ${user}:${user} "${STEAMAPPDIR}"
+chown -R ${user}:${user} "${STEAMAPPDIR}"
+
 # fix unbound variables errors
 set +u
 
