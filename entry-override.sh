@@ -3,6 +3,9 @@
 
 #set -euf -o pipefail
 
+# take ownership of our mounted path if different
+sudo chown -R "${USER}:${USER}" "${STEAMAPPDIR}"
+
 if [[ -f "${STEAMAPPDIR}/pre.sh" ]]; then
     rm "${STEAMAPPDIR}/pre.sh"
 fi
