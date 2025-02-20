@@ -1,17 +1,17 @@
 #!/bin/bash
 
-set -euf -o pipefail
+#set -euf -o pipefail
 
-cp -fR /etc/custom_files.base/. ./game/csgo/
+cp -fR /etc/custom_files.base/. "${STEAMAPPDIR}/game/csgo/"
 
 if [[ -d /etc/custom_files ]]; then
-    cp -fR /etc/custom_files/. ./game/csgo/
+    cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
 fi
 
 # Thanks to kus/cs2-modded-server
 
 # Define the file name
-FILE="game/csgo/gameinfo.gi"
+FILE="${STEAMAPPDIR}/game/csgo/gameinfo.gi"
 
 # Define the pattern to search for and the line to add
 PATTERN="Game_LowViolence[[:space:]]*csgo_lv // Perfect World content override"
