@@ -8,6 +8,53 @@ if [[ -d /etc/custom_files ]]; then
     cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
 fi
 
+# generate our SQL connection configuration
+echo "TEZT: $CS2_ADMIN_SQL_HOST"
+if [[ "$CS2_ADMIN_SQL_HOST" != "" ]]; then
+    echo "Generating admin SQL configuration"
+    CONFIG_PATH="${STEAMAPPDIR}/game/csgo/addons/counterstrikesharp/configs/plugins"
+
+    mkdir -p "${CONFIG_PATH}/baseadminsql"
+    cat > "${CONFIG_PATH}/baseadminsql/baseadminsql.json" << EOF
+{
+    "Database": {
+        "Host": "$CS2_ADMIN_SQL_HOST",
+        "Port": $CS2_ADMIN_SQL_PORT,
+        "User": "$CS2_ADMIN_SQL_USER",
+        "Password": "$CS2_ADMIN_SQL_PASSWORD",
+        "Name": "$CS2_ADMIN_SQL_NAME"
+    }
+}
+EOF
+
+    mkdir -p "${CONFIG_PATH}/basecommtemp"
+    cat > "${CONFIG_PATH}/basecommtemp/basecommtemp.json" << EOF
+{
+    "Database": {
+        "Host": "$CS2_ADMIN_SQL_HOST",
+        "Port": $CS2_ADMIN_SQL_PORT,
+        "User": "$CS2_ADMIN_SQL_USER",
+        "Password": "$CS2_ADMIN_SQL_PASSWORD",
+        "Name": "$CS2_ADMIN_SQL_NAME"
+    }
+}
+EOF
+
+mkdir -p "${CONFIG_PATH}/basebans"
+    cat > "${CONFIG_PATH}/basebans/basebans.json" << EOF
+{
+    "Database": {
+        "Host": "$CS2_ADMIN_SQL_HOST",
+        "Port": $CS2_ADMIN_SQL_PORT,
+        "User": "$CS2_ADMIN_SQL_USER",
+        "Password": "$CS2_ADMIN_SQL_PASSWORD",
+        "Name": "$CS2_ADMIN_SQL_NAME"
+    }
+}
+EOF
+
+fi
+
 # Thanks to kus/cs2-modded-server
 
 # Define the file name

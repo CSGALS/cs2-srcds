@@ -3,14 +3,17 @@
 
 #set -euf -o pipefail
 
+mkdir -p "${STEAMAPPDIR}"
+
 # take ownership of our mounted path if different
 sudo chown -R "${USER}:${USER}" "${STEAMAPPDIR}"
 
-if [[ -f "${STEAMAPPDIR}/pre.sh" ]]; then
-    rm "${STEAMAPPDIR}/pre.sh"
+if [[ -f /etc/pre.sh ]]; then
+    cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
 fi
-if [[ -f "${STEAMAPPDIR}/post.sh" ]]; then
-    rm "${STEAMAPPDIR}/post.sh"
+
+if [[ -f /etc/post.sh ]]; then
+    cp /etc/post.sh "${STEAMAPPDIR}/post.sh"
 fi
 
 # fix unbound variables errors
