@@ -127,7 +127,7 @@
         </member>
         <member name="M:CounterStrikeSharp.API.Core.BasePlugin.RegisterAttributeHandlers(System.Object)">
             <summary>
-            Registers all game event handlers that are decorated with the <see cref="T:CounterStrikeSharp.API.Core.Attributes.Registration.GameEventHandlerAttribute"/> attribute.
+            Registers all game event handlers that are decorated with the <see cref="T:CounterStrikeSharp.API.Core.Attributes.Registration.GameEventHandlerAttribute"/> and <see cref="T:CounterStrikeSharp.API.Core.Attributes.Registration.ListenerHandlerAttribute`1"/> attribute.
             </summary>
             <param name="instance">The instance of the object where the event handlers are defined.</param>
         </member>
@@ -548,6 +548,11 @@
             </summary>
             <param name="infoList">Transmit info list</param>
         </member>
+        <member name="T:CounterStrikeSharp.API.Core.Listeners.OnMetamodAllPluginsLoaded">
+            <summary>
+            Called when all metamod plugins are loaded.
+            </summary>
+        </member>
         <member name="M:CounterStrikeSharp.API.Core.CBaseEntity.Teleport(CounterStrikeSharp.API.Modules.Utils.Vector,CounterStrikeSharp.API.Modules.Utils.QAngle,CounterStrikeSharp.API.Modules.Utils.Vector)">
             <exception cref="T:System.InvalidOperationException">Entity is not valid</exception>
             <exception cref="T:System.ArgumentNullException">No valid argument</exception>
@@ -565,6 +570,16 @@
             Shorthand for accessing an entity's CBodyComponent?.SceneNode?.AbsRotation;
             </summary>
             <exception cref="T:System.InvalidOperationException">Entity is not valid</exception>
+        </member>
+        <member name="M:CounterStrikeSharp.API.Core.CBaseEntity.EmitSound(System.String,CounterStrikeSharp.API.Modules.Utils.RecipientFilter,System.Single,System.Single)">
+            <summary>
+            Emit a soundevent to all players.
+            </summary>
+            <param name="soundEventName">The name of the soundevent to emit.</param>
+            <param name="recipients">The recipients of the soundevent.</param>
+            <param name="volume">The volume of the soundevent.</param>
+            <param name="pitch">The pitch of the soundevent.</param>
+            <returns>The sound event guid.</returns>
         </member>
         <member name="M:CounterStrikeSharp.API.Core.CBaseModelEntity.SetModel(System.String)">
             <exception cref="T:System.InvalidOperationException">Entity is not valid</exception>
@@ -1808,6 +1823,13 @@
             <param name="fieldName" example="m_iHealth">Schema field name</param>
             <param name="extraOffset">Any additional offset to the schema field</param>
             <exception cref="T:System.InvalidOperationException">Entity is not valid</exception>
+        </member>
+        <member name="M:CounterStrikeSharp.API.Utilities.MetaFactory(System.String)">
+            <summary>
+            metamod method 'MetaFactory' to get the pointer of api interface exposed by metamod plugins.
+            Returns null when the interface cannot be found.
+            </summary>
+            <param name="interfaceName">The interface name of metamod api, can be found in their api header file</param>
         </member>
         <member name="T:CounterStrikeSharp.API.ValveConstants.Protobuf.NetworkDisconnectionReason">
             <summary>
