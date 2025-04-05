@@ -11,7 +11,10 @@ USER ${USER}
 
 COPY entry-override.sh "${HOMEDIR}/entry-override.sh"
 
-COPY custom_files /etc/custom_files.base
+COPY mods/metamod /etc/custom_files
+COPY mods/serverlistplayersfix /etc/custom_files
+COPY mods/counterstrikesharp /etc/custom_files
+
 COPY pre.sh /etc/pre.sh
 
 CMD [ "bash", "entry-override.sh" ]
