@@ -11,6 +11,7 @@ USER ${USER}
 
 COPY entry-override.sh "${HOMEDIR}/entry-override.sh"
 
+# TODO: use this? https://stackoverflow.com/a/78554347
 COPY mods/metamod /etc/custom_files
 COPY mods/serverlistplayersfix /etc/custom_files
 COPY mods/counterstrikesharp /etc/custom_files

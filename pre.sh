@@ -13,7 +13,7 @@ cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
 # copy custom mods
 if [[ -d /etc/custom_files.d ]]; then
     cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
-    find /etc/custom_files.d -maxdepth 1 -mindepth 1 -type d -exec cp {}/. "${STEAMAPPDIR}/game/csgo/" \;
+    find /etc/custom_files.d -maxdepth 1 -mindepth 1 -type d -exec cp -fR {}/. "${STEAMAPPDIR}/game/csgo/" \;
 fi
 
 # execute custom scripts
