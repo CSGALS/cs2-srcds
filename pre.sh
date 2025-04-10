@@ -2,57 +2,23 @@
 
 #set -euf -o pipefail
 
-cp -fR /etc/custom_files.base/. "${STEAMAPPDIR}/game/csgo/"
-
-if [[ -d /etc/custom_files ]]; then
-    cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
+# clear addons dir
+if [[ -d "${STEAMAPPDIR}/game/csgo/addons" ]]; then
+    rm -rf "${STEAMAPPDIR}/game/csgo/addons"
 fi
 
-# generate our SQL connection configuration
-echo "TEZT: $CS2_ADMIN_SQL_HOST"
-if [[ "$CS2_ADMIN_SQL_HOST" != "" ]]; then
-    echo "Generating admin SQL configuration"
-    CONFIG_PATH="${STEAMAPPDIR}/game/csgo/addons/counterstrikesharp/configs/plugins"
+# copy the base installed mods
+cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
 
-    mkdir -p "${CONFIG_PATH}/baseadminsql"
-    cat > "${CONFIG_PATH}/baseadminsql/baseadminsql.json" << EOF
-{
-    "Database": {
-        "Host": "$CS2_ADMIN_SQL_HOST",
-        "Port": $CS2_ADMIN_SQL_PORT,
-        "User": "$CS2_ADMIN_SQL_USER",
-        "Password": "$CS2_ADMIN_SQL_PASSWORD",
-        "Name": "$CS2_ADMIN_SQL_NAME"
-    }
-}
-EOF
+# copy custom mods
+if [[ -d /etc/custom_files.d ]]; then
+    cp -fR /etc/custom_files/. "${STEAMAPPDIR}/game/csgo/"
+    find /etc/custom_files.d -maxdepth 1 -mindepth 1 -type d -exec cp -fR {}/. "${STEAMAPPDIR}/game/csgo/" \;
+fi
 
-    mkdir -p "${CONFIG_PATH}/basecommtemp"
-    cat > "${CONFIG_PATH}/basecommtemp/basecommtemp.json" << EOF
-{
-    "Database": {
-        "Host": "$CS2_ADMIN_SQL_HOST",
-        "Port": $CS2_ADMIN_SQL_PORT,
-        "User": "$CS2_ADMIN_SQL_USER",
-        "Password": "$CS2_ADMIN_SQL_PASSWORD",
-        "Name": "$CS2_ADMIN_SQL_NAME"
-    }
-}
-EOF
-
-mkdir -p "${CONFIG_PATH}/basebans"
-    cat > "${CONFIG_PATH}/basebans/basebans.json" << EOF
-{
-    "Database": {
-        "Host": "$CS2_ADMIN_SQL_HOST",
-        "Port": $CS2_ADMIN_SQL_PORT,
-        "User": "$CS2_ADMIN_SQL_USER",
-        "Password": "$CS2_ADMIN_SQL_PASSWORD",
-        "Name": "$CS2_ADMIN_SQL_NAME"
-    }
-}
-EOF
-
+# execute custom scripts
+if [[ -d /etc/pre.d ]]; then
+    find /etc/pre.d -maxdepth 1 -mindepth 1 -type f -exec bash {} \;
 fi
 
 # Thanks to kus/cs2-modded-server
