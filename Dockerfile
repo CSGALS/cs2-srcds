@@ -1,6 +1,6 @@
-ARG HOMEDIR="/home/steam"
-
 FROM joedwards32/cs2:latest
+
+ARG HOMEDIR="/home/steam"
 
 LABEL maintainer="ashleigh.k.adams@gmail.com"
 
