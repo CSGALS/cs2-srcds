@@ -1,3 +1,5 @@
+ARG HOMEDIR="/home/steam"
+
 FROM joedwards32/cs2:latest
 
 LABEL maintainer="ashleigh.k.adams@gmail.com"
