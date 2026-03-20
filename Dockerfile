@@ -1,4 +1,4 @@
-FROM joedwards32/cs2:latest
+FROM joedwards32/cs2:v4.0.0
 
 ARG HOMEDIR="/home/steam"
 
